@@ -1,0 +1,33 @@
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String?
+  role         Role     @default(CANDIDATE)
+  profilePhoto String?
+  isVerified   Boolean  @default(false)
+  isBanned     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  candidateProfile CandidateProfile?
+  company          Company?
+  applications     Application[]
+  savedJobs        SavedJob[]
+
+  @@map("users")
+}
+
+model CandidateProfile {
+  id         String   @id @default(uuid())
+  userId     String   @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resumeUrl  String?
+  skills     String[]
+  experience String?
+  bio        String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("candidate_profiles")
+}

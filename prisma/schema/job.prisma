@@ -1,0 +1,29 @@
+model Job {
+  id              String    @id @default(uuid())
+  companyId       String
+  company         Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  categoryId      String
+  category        Category  @relation(fields: [categoryId], references: [id])
+  title           String
+  description     String
+  requirements    String[]
+  location        String
+  type            JobType
+  salaryMin       Int?
+  salaryMax       Int?
+  experienceLevel String
+  vacancy         Int       @default(1)
+  deadline        DateTime
+  status          JobStatus @default(PENDING)
+  isDeleted       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  applications    Application[]
+  savedBy         SavedJob[]
+
+  @@index([categoryId])
+  @@index([location])
+  @@index([status])
+  @@map("jobs")
+}
