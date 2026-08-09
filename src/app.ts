@@ -3,6 +3,7 @@ import config from "./config";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { AuthRoutes } from "./modules/auth/auth.route";
+import { JobRoutes } from "./modules/job/job.route";
 
 const app: Application = express();
 
@@ -22,5 +23,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use('/api/auth', AuthRoutes);
+
+app.use('/api/jobs', JobRoutes);
 
 export default app;

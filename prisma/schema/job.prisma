@@ -9,8 +9,8 @@ model Job {
   requirements    String[]
   location        String
   type            JobType
-  salaryMin       Int?
-  salaryMax       Int?
+  salaryMin       Int
+  salaryMax       Int
   experienceLevel String
   vacancy         Int       @default(1)
   deadline        DateTime
