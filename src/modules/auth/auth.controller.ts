@@ -28,6 +28,7 @@ const register = catchAsync(async (req, res) => {
     data: {
       accessToken: result.accessToken,
       refreshToken: result.refreshToken,
+      user: { id: result.user.id, name: result.user.name, role: result.user.role }
     },
   });
 });

@@ -1,10 +1,10 @@
-import httpStatus from 'http-status';
 import bcrypt from 'bcrypt';
+import httpStatus from 'http-status';
+import { prisma } from '../../lib/prisma';
 import AppError from '../../errors/AppError';
 import config from '../../config';
 import { generateToken, verifyToken } from '../../utils/generateToken';
 import { TLoginUser, TRegisterUser } from './auth.interface';
-import { prisma } from '../../lib/prisma';
 import { Prisma } from '../../../generated/prisma/client';
 
 const registerUser = async (payload: TRegisterUser) => {
@@ -62,7 +62,16 @@ const registerUser = async (payload: TRegisterUser) => {
     config.jwt_refresh_expires_in as string
   );
 
-  return { accessToken, refreshToken };
+  return {
+    accessToken,
+    refreshToken,
+    user: {
+      id: result.id,
+      name: result.name,
+      email: result.email,
+      role: result.role,
+    },
+  };
 };
 
 const loginUser = async (payload: TLoginUser) => {
@@ -100,7 +109,16 @@ const loginUser = async (payload: TLoginUser) => {
     config.jwt_refresh_expires_in as string
   );
 
-  return { accessToken, refreshToken };
+  return {
+    accessToken,
+    refreshToken,
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+  };
 };
 
 const refreshToken = async (token: string) => {

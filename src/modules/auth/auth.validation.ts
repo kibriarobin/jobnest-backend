@@ -4,7 +4,7 @@ const registerValidation = z.object({
   body: z
     .object({
       name: z.string({ error: 'Name is required' }).min(2),
-      email: z.string({ error: 'Email is required' }).email(),
+      email: z.email({ error: 'Email is required' }),
       password: z
         .string({ error: 'Password is required' })
         .min(6, 'Password must be at least 6 characters'),
@@ -19,7 +19,7 @@ const registerValidation = z.object({
 
 const loginValidation = z.object({
   body: z.object({
-    email: z.string({ error: 'Email is required' }).email(),
+    email: z.email({ error: 'Email is required' }),
     password: z.string({ error: 'Password is required' }),
   }),
 });
