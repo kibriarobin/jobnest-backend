@@ -9,6 +9,7 @@ import globalErrorHandler from "./middlewares/globalErrorHandler";
 import notFound from "./middlewares/notFound";
 import { ApplicationRoutes } from "./modules/application/application.route";
 import { SavedJobRoutes } from "./modules/savedJob/savedJob.route";
+import { ReviewRoutes } from "./modules/review/review.route";
 
 const app: Application = express();
 
@@ -36,6 +37,8 @@ app.use('/api/categories', CategoryRoutes);
 app.use('/api/applications', ApplicationRoutes);
 
 app.use('/api/saved-jobs', SavedJobRoutes);
+
+app.use('/api/reviews', ReviewRoutes);
 
 app.use(notFound);
 app.use(globalErrorHandler);
