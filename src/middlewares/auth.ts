@@ -24,7 +24,7 @@ const auth = (...allowedRoles: Role[]) => {
   return catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       const token =
-        req.headers.authorization?.split(' ')[1] || req.cookies?.accessToken; // header অথবা cookie, যেটা পাওয়া যায়
+        req.headers.authorization?.split(' ')[1] || req.cookies?.accessToken; 
 
       if (!token) {
         throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized');
