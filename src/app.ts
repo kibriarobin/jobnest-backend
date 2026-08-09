@@ -11,6 +11,7 @@ import { ApplicationRoutes } from "./modules/application/application.route";
 import { SavedJobRoutes } from "./modules/savedJob/savedJob.route";
 import { ReviewRoutes } from "./modules/review/review.route";
 import { UserRoutes } from "./modules/user/user.route";
+import { CompanyRoutes } from "./modules/company/company.route";
 
 const app: Application = express();
 
@@ -42,6 +43,8 @@ app.use('/api/saved-jobs', SavedJobRoutes);
 app.use('/api/reviews', ReviewRoutes);
 
 app.use('/api/users', UserRoutes);
+
+app.use('/api/companies', CompanyRoutes);
 
 app.use(notFound);
 app.use(globalErrorHandler);
