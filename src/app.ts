@@ -8,6 +8,7 @@ import { CategoryRoutes } from "./modules/category/category.route";
 import globalErrorHandler from "./middlewares/globalErrorHandler";
 import notFound from "./middlewares/notFound";
 import { ApplicationRoutes } from "./modules/application/application.route";
+import { SavedJobRoutes } from "./modules/savedJob/savedJob.route";
 
 const app: Application = express();
 
@@ -27,10 +28,14 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use('/api/auth', AuthRoutes);
+
 app.use('/api/jobs', JobRoutes);
+
 app.use('/api/categories', CategoryRoutes);
 
 app.use('/api/applications', ApplicationRoutes);
+
+app.use('/api/saved-jobs', SavedJobRoutes);
 
 app.use(notFound);
 app.use(globalErrorHandler);
