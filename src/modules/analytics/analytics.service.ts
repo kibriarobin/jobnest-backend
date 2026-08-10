@@ -111,7 +111,7 @@ const getAdminOverview = async () => {
   const totalCandidates = await prisma.user.count({ where: { role: 'CANDIDATE' } });
   const totalEmployers = await prisma.user.count({ where: { role: 'EMPLOYER' } });
   const totalJobs = await prisma.job.count({ where: { isDeleted: false } });
-  const pendingJobs = await prisma.job.count({ where: { status: 'PENDING' } });
+  const pendingJobs = await prisma.job.count({ where: { status: 'PENDING', isDeleted: false } });
   const totalCompanies = await prisma.company.count();
   const verifiedCompanies = await prisma.company.count({ where: { isVerified: true } });
   const totalApplications = await prisma.application.count();
@@ -124,10 +124,10 @@ const getAdminOverview = async () => {
   });
 
   // Bar chart: category
-  const jobsByCategory = await prisma.category.findMany({
+   const jobsByCategory = await prisma.category.findMany({
     select: {
       name: true,
-      _count: { select: { jobs: true } },
+      _count: { select: { jobs: { where: { isDeleted: false } } } },
     },
   });
 
