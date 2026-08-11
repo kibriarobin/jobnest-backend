@@ -3,6 +3,22 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { CompanyService } from './company.service';
 
+const getAllCompaniesPublic = catchAsync(async (req, res) => {
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 12;
+  const searchTerm = req.query.searchTerm as string | undefined;
+
+  const result = await CompanyService.getAllCompaniesPublic({ page, limit, searchTerm });
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Companies retrieved successfully',
+    meta: result.meta,
+    data: result.data,
+  });
+});
+
 const getAllCompaniesForAdmin = catchAsync(async (req, res) => {
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;
@@ -44,4 +60,5 @@ export const CompanyController = {
   getAllCompaniesForAdmin,
   getSingleCompany,
   toggleVerifyCompany,
+  getAllCompaniesPublic,
 };

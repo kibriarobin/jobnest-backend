@@ -4,6 +4,7 @@ import { CompanyController } from './company.controller';
 
 const router = express.Router();
 
+router.get('/', CompanyController.getAllCompaniesPublic);
 router.get('/admin/all', auth('ADMIN'), CompanyController.getAllCompaniesForAdmin);
 router.patch('/admin/:id/verify', auth('ADMIN'), CompanyController.toggleVerifyCompany);
 
