@@ -163,6 +163,21 @@ const getAdminOverview = async () => {
   };
 };
 
+const getPublicStats = async () => {
+  const totalJobs = await prisma.job.count({
+    where: { status: 'APPROVED', isDeleted: false },
+  });
+  const totalCategories = await prisma.category.count();
+  const totalCandidates = await prisma.user.count({ where: { role: 'CANDIDATE' } });
+  const totalCompanies = await prisma.company.count();
+
+  return {
+    totalJobs,
+    totalCategories,
+    totalCandidates,
+    totalCompanies,
+  };
+};
 
 const groupByDate = (dates: Date[]) => {
   const counts: Record<string, number> = {};
@@ -181,4 +196,5 @@ export const AnalyticsService = {
   getCandidateOverview,
   getEmployerOverview,
   getAdminOverview,
+  getPublicStats,
 };

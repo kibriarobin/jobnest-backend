@@ -36,8 +36,20 @@ const getAdminOverview = catchAsync(async (req, res) => {
   });
 });
 
+const getPublicStats = catchAsync(async (req, res) => {
+  const result = await AnalyticsService.getPublicStats();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Public stats retrieved successfully',
+    data: result,
+  });
+});
+
 export const AnalyticsController = {
   getCandidateOverview,
   getEmployerOverview,
   getAdminOverview,
+  getPublicStats
 };

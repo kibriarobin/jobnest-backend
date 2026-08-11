@@ -4,6 +4,8 @@ import { AnalyticsController } from './analytics.controller';
 
 const router = express.Router();
 
+router.get('/public-stats', AnalyticsController.getPublicStats);
+
 router.get('/candidate-overview', auth('CANDIDATE'), AnalyticsController.getCandidateOverview);
 router.get('/employer-overview', auth('EMPLOYER'), AnalyticsController.getEmployerOverview);
 router.get('/admin-overview', auth('ADMIN'), AnalyticsController.getAdminOverview);
