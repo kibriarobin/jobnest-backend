@@ -121,6 +121,23 @@ const loginUser = async (payload: TLoginUser) => {
   };
 };
 
+const generateTokensForUser = (user: { id: string; email: string; role: string }) => {
+  const jwtPayload = { userId: user.id, email: user.email, role: user.role };
+
+  const accessToken = generateToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string
+  );
+  const refreshToken = generateToken(
+    jwtPayload,
+    config.jwt_refresh_secret as string,
+    config.jwt_refresh_expires_in as string
+  );
+
+  return { accessToken, refreshToken };
+};
+
 const refreshToken = async (token: string) => {
   let decoded;
   try {
@@ -152,4 +169,5 @@ export const AuthService = {
   registerUser,
   loginUser,
   refreshToken,
+  generateTokensForUser,
 };

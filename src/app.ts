@@ -13,6 +13,7 @@ import { ReviewRoutes } from "./modules/review/review.route";
 import { UserRoutes } from "./modules/user/user.route";
 import { CompanyRoutes } from "./modules/company/company.route";
 import { AnalyticsRoutes } from "./modules/analytics/analytics.route";
+import passport from './utils/passport';
 
 const app: Application = express();
 
@@ -32,6 +33,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use('/api/auth', AuthRoutes);
+
+app.use(passport.initialize());
 
 app.use('/api/jobs', JobRoutes);
 
