@@ -69,7 +69,7 @@ const googleCallback = catchAsync(async (req, res) => {
   const { accessToken, refreshToken } = AuthService.generateTokensForUser(user);
 
   res.redirect(
-    `${config.client_url}/api/auth/google-callback?accessToken=${accessToken}&refreshToken=${refreshToken}`
+    `${config.client_url}/api/googleAuth?accessToken=${accessToken}&refreshToken=${refreshToken}`
   );
 });
 
