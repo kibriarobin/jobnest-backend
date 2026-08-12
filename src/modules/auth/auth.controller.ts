@@ -62,26 +62,15 @@ const login = catchAsync(async (req, res) => {
   });
 });
 
+
 const googleCallback = catchAsync(async (req, res) => {
   const user = req.user as { id: string; email: string; role: string; name: string };
 
   const { accessToken, refreshToken } = AuthService.generateTokensForUser(user);
 
-  res.cookie('accessToken', accessToken, {
-    secure: config.node_env === 'production',
-    httpOnly: true,
-    sameSite: config.node_env === 'production' ? 'none' : 'lax',
-    maxAge: 1000 * 60 * 60 * 24,
-  });
-
-  res.cookie('refreshToken', refreshToken, {
-    secure: config.node_env === 'production',
-    httpOnly: true,
-    sameSite: config.node_env === 'production' ? 'none' : 'lax',
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-  });
-
-  res.redirect(`${config.client_url}/candidate-dashboard`);
+  res.redirect(
+    `${config.client_url}/api/auth/google-callback?accessToken=${accessToken}&refreshToken=${refreshToken}`
+  );
 });
 
 const refreshToken = catchAsync(async (req, res) => {
