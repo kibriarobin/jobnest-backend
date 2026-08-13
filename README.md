@@ -151,16 +151,6 @@ All protected routes require a valid JWT sent via httpOnly cookies (`accessToken
 
 ---
 
-## 🔐 Demo Credentials
-
-| Role | Email | Password |
-|---|---|---|
-| Candidate | demo.candidate@jobnest.com | demo1234 |
-| Employer | demo.employer@jobnest.com | demo1234 |
-| Admin | demo.admin@jobnest.com | demo1234 |
-
----
-
 ## 🏗️ Architecture Notes
 
 - **Modular structure** — each domain (auth, job, application, etc.) has its own route, controller, service, and validation files
